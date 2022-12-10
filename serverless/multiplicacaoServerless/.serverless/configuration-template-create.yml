@@ -1,0 +1,5 @@
+resources:
+  - type: storage.v1.bucket
+    name: sls-multiplicacaoserverless-dev-1670533433923
+    properties:
+      location: southamerica-east1

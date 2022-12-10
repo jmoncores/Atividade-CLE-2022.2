@@ -1,0 +1,34 @@
+resources:
+  - type: storage.v1.bucket
+    name: sls-multiplicacaoserverless-dev-1670533433923
+    properties:
+      location: southamerica-east1
+  - type: gcp-types/cloudfunctions-v1:projects.locations.functions
+    name: multiplicacaoserverless-dev-recebeOpMultiplicacao
+    properties:
+      parent: projects/operacoesserverless/locations/southamerica-east1
+      availableMemoryMb: 256
+      runtime: nodejs10
+      timeout: 60s
+      entryPoint: recebeOpMultiplicacao
+      function: multiplicacaoserverless-dev-recebeOpMultiplicacao
+      sourceArchiveUrl: >-
+        gs://sls-multiplicacaoserverless-dev-1670533433923/serverless/multiplicacaoserverless/dev/1670593231281-2022-12-09T13:40:31.281Z/multiplicacaoserverless.zip
+      labels: {}
+      httpsTrigger:
+        url: path
+  - type: gcp-types/cloudfunctions-v1:projects.locations.functions
+    name: multiplicacaoserverless-dev-multiplica
+    properties:
+      parent: projects/operacoesserverless/locations/southamerica-east1
+      availableMemoryMb: 256
+      runtime: nodejs10
+      timeout: 60s
+      entryPoint: multiplica
+      function: multiplicacaoserverless-dev-multiplica
+      sourceArchiveUrl: >-
+        gs://sls-multiplicacaoserverless-dev-1670533433923/serverless/multiplicacaoserverless/dev/1670593231281-2022-12-09T13:40:31.281Z/multiplicacaoserverless.zip
+      labels: {}
+      eventTrigger:
+        eventType: providers/cloud.pubsub/eventTypes/topic.publish
+        resource: projects/operacoesserverless/topics/multiplicacao
